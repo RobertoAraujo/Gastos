@@ -18,14 +18,18 @@ public class PessoaController {
     @Autowired
     private PessoasService service;
 
+    @PostMapping(value = "/cadastrar")
+    public ResponseEntity<PessoaEntity> cadastrar(
+            @RequestBody PessoaEntity pessoa, UriComponentsBuilder uriBilder) {
+        service.save(pessoa);
+        URI uri = uriBilder.path("/pessoa/{id}").buildAndExpand(pessoa.getId()).toUri();
+        return ResponseEntity.created(uri).body(
+                new PessoaEntity(pessoa.getId(), pessoa.getNome()));
+    }
+
     @GetMapping(value = "/listar")
     public ResponseEntity<List<PessoaEntity>> listarTodos() {
         return ResponseEntity.ok(service.findAll());
-    }
-
-    @GetMapping(value = "/nome/{nome}")
-    public ResponseEntity<List<PessoaEntity>> listarPorNome(@PathVariable String nome) {
-        return ResponseEntity.ok(service.findByNomeInquilino(nome));
     }
 
     @GetMapping(value = "id/{id}")
@@ -33,13 +37,9 @@ public class PessoaController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping(value = "/cadastrar")
-    public ResponseEntity<PessoaEntity> cadastrar(
-            @RequestBody PessoaEntity pessoa, UriComponentsBuilder uriBilder) {
-        service.save(pessoa);
-        URI uri = uriBilder.path("/inquilino/{id}").buildAndExpand(pessoa.getId()).toUri();
-        return ResponseEntity.created(uri).body(
-                new PessoaEntity(pessoa.getId(), pessoa.getNome()));
+    @GetMapping(value = "/nome/{nome}")
+    public ResponseEntity<List<PessoaEntity>> listarPorNome(@PathVariable String nome) {
+        return ResponseEntity.ok(service.findByNomeInquilino(nome));
     }
 
     @PutMapping(value = "/update/{id}")
