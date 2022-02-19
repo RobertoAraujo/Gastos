@@ -3,10 +3,12 @@ package br.gov.ac.sefaz.gastos.service;
 import br.gov.ac.sefaz.gastos.model.PessoaEntity;
 import br.gov.ac.sefaz.gastos.reposytory.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PessoasService {
     @Autowired
     private PessoaRepository repository;

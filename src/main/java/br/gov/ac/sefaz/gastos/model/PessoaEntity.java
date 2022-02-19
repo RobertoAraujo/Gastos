@@ -12,9 +12,15 @@ public class PessoaEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String nome;
 
     public PessoaEntity() {
+    }
+
+    public PessoaEntity(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 
     public Long getId() {
