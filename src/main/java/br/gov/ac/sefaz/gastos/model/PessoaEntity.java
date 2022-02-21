@@ -12,8 +12,10 @@ public class PessoaEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String nome;
+
 
     public PessoaEntity() {
     }
@@ -38,6 +40,7 @@ public class PessoaEntity implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     @Override
     public boolean equals(Object o) {

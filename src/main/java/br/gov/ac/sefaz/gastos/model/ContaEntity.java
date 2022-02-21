@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "financas")
-public class FinancasEntity implements Serializable {
+@Table(name = "conta")
+public class ContaEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -25,7 +25,19 @@ public class FinancasEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Tag tag;
 
-    public FinancasEntity() {
+    @ManyToOne
+    @JoinColumn(name ="pessoa_id")
+    private PessoaEntity pessoa;
+
+    public ContaEntity() {
+    }
+
+    public ContaEntity(Long id, LocalDate data, String descricao, Tag tag, double valor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.data = data;
+        this.valor = valor;
+        this.tag = tag;
     }
 
     public Long getId() {
@@ -68,11 +80,19 @@ public class FinancasEntity implements Serializable {
         this.tag = tag;
     }
 
+    public PessoaEntity getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PessoaEntity pessoa) {
+        this.pessoa = pessoa;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FinancasEntity)) return false;
-        FinancasEntity that = (FinancasEntity) o;
+        if (!(o instanceof ContaEntity)) return false;
+        ContaEntity that = (ContaEntity) o;
         return Double.compare(that.getValor(), getValor()) == 0 && Objects.equals(getId(), that.getId()) && Objects.equals(getDescricao(), that.getDescricao()) && Objects.equals(getData(), that.getData()) && getTag() == that.getTag();
     }
 
