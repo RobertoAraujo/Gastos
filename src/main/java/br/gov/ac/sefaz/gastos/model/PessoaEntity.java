@@ -16,7 +16,6 @@ public class PessoaEntity implements Serializable {
     @Column
     private String nome;
 
-
     public PessoaEntity() {
     }
 

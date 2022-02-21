@@ -29,7 +29,7 @@ public class ContaEntity implements Serializable {
     private Tag tag;
 
     @ManyToOne
-    @JoinColumn(name ="pessoa_fk", referencedColumnName = "id")
+    @JoinColumn(name = "pessoa_fk", referencedColumnName = "id")
     private PessoaEntity pessoa;
 
     @JsonProperty(value = "pessoa_id")
@@ -38,7 +38,7 @@ public class ContaEntity implements Serializable {
     public ContaEntity() {
     }
 
-    public ContaEntity(Long id, LocalDate data, String descricao, Tag tag, double valor,PessoaEntity pessoa) {
+    public ContaEntity(Long id, LocalDate data, String descricao, Tag tag, double valor, PessoaEntity pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.data = data;

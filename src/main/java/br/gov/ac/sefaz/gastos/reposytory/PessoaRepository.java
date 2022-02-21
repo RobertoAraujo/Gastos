@@ -13,4 +13,7 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Long> {
     List<PessoaEntity> findAllByNomeIsLike(String nome);
 
     Optional<PessoaEntity> findById(Long id);
+
+    Optional<PessoaEntity> findAllById(Long id);
+
 }

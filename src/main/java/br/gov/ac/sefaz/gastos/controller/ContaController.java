@@ -1,5 +1,7 @@
 package br.gov.ac.sefaz.gastos.controller;
 
+import br.gov.ac.sefaz.gastos.dto.ContaDTO;
+import br.gov.ac.sefaz.gastos.dto.PessoaDTO;
 import br.gov.ac.sefaz.gastos.model.ContaEntity;
 import br.gov.ac.sefaz.gastos.model.PessoaEntity;
 import br.gov.ac.sefaz.gastos.service.ContaService;
@@ -31,5 +33,11 @@ public class ContaController {
     public  ResponseEntity<List<ContaEntity>> listarTodasConytas(){
         return  ResponseEntity.ok(service.findAll());
     }
+
+    @GetMapping(value = "/id/{id}")
+    public ResponseEntity<Object> listarTodosPorId(@PathVariable("id") long id) {
+        return ResponseEntity.ok(service.findById(id));
+    }
+
 
 }
