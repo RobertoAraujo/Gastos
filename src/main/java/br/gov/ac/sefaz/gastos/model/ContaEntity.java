@@ -1,10 +1,13 @@
 package br.gov.ac.sefaz.gastos.model;
 
 import br.gov.ac.sefaz.gastos.constants.Tag;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,18 +29,22 @@ public class ContaEntity implements Serializable {
     private Tag tag;
 
     @ManyToOne
-    @JoinColumn(name ="pessoa_id")
+    @JoinColumn(name ="pessoa_fk", referencedColumnName = "id")
     private PessoaEntity pessoa;
+
+    @JsonProperty(value = "pessoa_id")
+    private Long pessoaId;
 
     public ContaEntity() {
     }
 
-    public ContaEntity(Long id, LocalDate data, String descricao, Tag tag, double valor) {
+    public ContaEntity(Long id, LocalDate data, String descricao, Tag tag, double valor,PessoaEntity pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.data = data;
         this.valor = valor;
         this.tag = tag;
+        this.pessoa = pessoa;
     }
 
     public Long getId() {
@@ -82,6 +89,14 @@ public class ContaEntity implements Serializable {
 
     public PessoaEntity getPessoa() {
         return pessoa;
+    }
+
+    public Long getPessoaId() {
+        return pessoaId;
+    }
+
+    public void setPessoaId(Long pessoaId) {
+        this.pessoaId = pessoaId;
     }
 
     public void setPessoa(PessoaEntity pessoa) {
